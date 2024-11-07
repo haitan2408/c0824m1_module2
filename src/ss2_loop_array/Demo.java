@@ -29,6 +29,8 @@ public class Demo {
         for (int i : arr) {
             present += i;
         }
+
+        ss3_method.Demo.isPrime(23);
 //        Arrays.stream(arr).reduce((value, present) -> value + present).ifPresent(System.out::println);
         Arrays.stream(arr).map(value -> value * 2).forEach(System.out::println);
     }
