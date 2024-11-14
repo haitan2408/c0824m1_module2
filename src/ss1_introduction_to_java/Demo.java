@@ -5,7 +5,7 @@ public class Demo {
 
     public static void main(String[] args) {
         final byte a = 127;
-        long b = 5;
+        long b =(long)5.0;
         long c = 23497893473578934L;
         long d = 5;
         float e = 2347939757349573L;
