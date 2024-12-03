@@ -4,16 +4,18 @@ import mvc.entity.Student;
 import mvc.repository.StudentRepository;
 import mvc.service.IStudentService;
 
+import java.util.List;
+
 public class StudentService implements IStudentService {
     private static StudentRepository studentRepository = new StudentRepository();
     @Override
-    public Student[] getAll() {
+    public List<Student> getAll() {
         return studentRepository.findAll();
     }
 
     @Override
     public void save(Student student) {
-
+        studentRepository.save(student);
     }
 
     @Override
@@ -29,5 +31,10 @@ public class StudentService implements IStudentService {
     @Override
     public Student findById(int id) {
         return null;
+    }
+
+    @Override
+    public List<Student> findAllByName(String name) {
+        return studentRepository.findAllByName(name);
     }
 }

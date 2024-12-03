@@ -24,8 +24,7 @@ public class Student extends Person {
 
     @Override
     public String toString() {
-        return super.toString()+", Student{" +
-                "point=" + point +
-                '}';
+        return  String.format("| %4d | %-20s | %-20s | %6.2f |", getCode(), getName(), getAddress(), point);
+
     }
 }

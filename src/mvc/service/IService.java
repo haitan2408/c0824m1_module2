@@ -3,8 +3,10 @@ package mvc.service;
 import mvc.entity.Person;
 import mvc.entity.Student;
 
+import java.util.List;
+
 public interface IService <T extends Person>{
-    T[] getAll();
+    List<T> getAll();
 
     void save(T t);
 
@@ -13,4 +15,6 @@ public interface IService <T extends Person>{
     void update(int id, T t);
 
     T findById(int id);
+
+    List<T> findAllByName(String name);
 }
