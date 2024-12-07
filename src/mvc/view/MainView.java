@@ -16,7 +16,7 @@ public class MainView {
             System.out.println("2. Quản lý giáo viên");
             System.out.println("3. Thoát");
             System.out.print("Mời bạn nhập lựa chọn: ");
-            int choice = Integer.parseInt(scanner.nextLine());
+            int choice = getChoice(scanner);
             switch (choice) {
                 case 1:
                     menuStudent();
@@ -44,7 +44,7 @@ public class MainView {
             System.out.println("6. Quay lại");
             System.out.print("Mời bạn nhập lựa chọn: ");
             List<Student> students;
-            int choice = Integer.parseInt(scanner.nextLine());
+            int choice = getChoice(scanner);
             switch (choice) {
                 case 1:
                     Student student = inputStudent(scanner);
@@ -73,6 +73,27 @@ public class MainView {
             }
         }
 
+    }
+
+    public static int getChoice(Scanner scanner) throws NumberFormatException {
+//        int choice;
+//        while(true) {
+//            try {
+//                choice = Integer.parseInt(scanner.nextLine());
+//                break;
+//            }catch (NumberFormatException e) {
+//                System.out.println("Người dùng nhập không đúng, vui lòng nhập lại");
+//            } catch (Exception e) {
+//                System.out.println("Lỗi không xác định");
+//            } finally {
+////                 Finally được thực hiện cuối cùng
+//            }
+//        }
+        int choice  = Integer.parseInt(scanner.nextLine());
+        if (choice < 1 || choice > 10000000) {
+            throw new NumberFormatException("Lỗi nhập choice");
+        }
+        return choice;
     }
 
     public static void printStudentsTable(List<Student> students) {
