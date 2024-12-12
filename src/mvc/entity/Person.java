@@ -1,8 +1,9 @@
 package mvc.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Person implements Comparable<Student>{
+public abstract class Person implements Comparable<Student>, Serializable {
     private int code;
     private String name;
     private String address;

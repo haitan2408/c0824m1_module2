@@ -19,4 +19,12 @@ public class StudentController {
     public void save(Student student) {
         studentService.save(student);
     }
+
+    public Student findById(int code) {
+        return studentService.findById(code);
+    }
+
+    public void remove(int code) {
+        studentService.remove(code);
+    }
 }

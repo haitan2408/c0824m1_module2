@@ -13,21 +13,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentRepository {
+    public static final String STUDENT_CSV = "src/mvc/data/student.csv";
 
-//    private static List<Student> students = new ArrayList<>();
-//
-//    static {
-//        students.add(0, new Student(1, "Nghĩa", "QN", 9));
-//        students.add(1, new Student(1, "haiTT2", "QN", 9));
-//        students.add(2, new Student(1, "Minh", "QN", 9));
-//        students.add(3, new Student(1, "haiTT4", "QN", 9));
-//        students.add(4, new Student(1, "Tài", "QN", 9));
-//        students.add(5, new Student(1, "haiTT6", "QN", 9));
-//    }
 
     public List<Student> findAll() {
-        File file = new File("src/mvc/data/student.csv");
+        File file = new File(STUDENT_CSV);
         List<Student> students = new ArrayList<>();
+//        try  {
+//            InputStream inputStream = new FileInputStream(file);
+//            ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+//            students = (List<Student>) objectInputStream.readObject();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Không tìm thấy file");
+//        } catch (IOException e) {
+//            System.out.println("Lỗi đọc file");
+//        } catch (ClassNotFoundException e) {
+//            System.out.println("Không tìm thấy class");
+//        }
         try (FileReader fileReader = new FileReader(file);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
             String line;
@@ -49,9 +51,9 @@ public class StudentRepository {
     public List<Student> findAllByName(String name) {
         List<Student> result = new ArrayList<>();
         List<Student> students = findAll();
-        for (Student student: students) {
+        for (Student student : students) {
 //            Tìm kiếm gần đúng
-            if(student.getName().contains(name)) {
+            if (student.getName().contains(name)) {
                 result.add(student);
             }
         }
@@ -59,19 +61,57 @@ public class StudentRepository {
     }
 
     public void save(Student student) {
-//        students.add(student);
-//        try with resources
-        File file = new File("src/mvc/data/student.csv");
-        try (FileWriter fileWriter = new FileWriter(file, true);
-             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
-            bufferedWriter.write(studentToString(student));
-            bufferedWriter.newLine();
-        } catch (IOException e) {
-            System.out.println("Lỗi ghi file");
-        }
+        List<Student> students = new ArrayList<>();
+        students.add(student);
+        writeFile(students, true);
+//        File file = new File("src/mvc/data/student.dat");
+//        try {
+//            OutputStream outputStream = new FileOutputStream(file);
+//            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+//            List<Student> students = findAll();
+//            students.add(student);
+//            objectOutputStream.writeObject(students);
+//        } catch (IOException e) {
+//            System.out.println("Lỗi dọc file");
+//        }
+
     }
 
     private String studentToString(Student student) {
-        return student.getCode()+","+student.getName()+","+student.getAddress()+","+student.getPoint();
+        return student.getCode() + "," + student.getName() + "," + student.getAddress() + "," + student.getPoint();
+    }
+
+    public Student findById(int id) {
+        List<Student> students = findAll();
+        for (Student student : students) {
+            if (student.getCode() == id) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    public void remove(int id) {
+        List<Student> students = findAll();
+        for (Student student : students) {
+            if (student.getCode() == id) {
+                students.remove(student);
+                break;
+            }
+        }
+        writeFile(students, false);
+    }
+
+    public void writeFile(List<Student> students, boolean append) {
+        File file = new File(STUDENT_CSV);
+        try (FileWriter fileWriter = new FileWriter(file, append);
+             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+            for (Student student: students) {
+                bufferedWriter.write(studentToString(student));
+                bufferedWriter.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Lỗi ghi file");
+        }
     }
 }

@@ -58,6 +58,20 @@ public class MainView {
                 case 3:
                     break;
                 case 4:
+                    System.out.print("Nhập vào mã học sinh cần xóa: ");
+                    int code = Integer.parseInt(scanner.nextLine());
+                    student = studentController.findById(code);
+                    if(student == null) {
+                        System.out.println("Không tìm thấy đối tượng cần xóa");
+                    } else {
+                        System.out.println("Thông tin của học sinh: "+ student);
+                        System.out.println("bạn có chắc muốn xóa hay không? Nếu có thì bấm Y, nếu không thì bấm N");
+                        char confirm = scanner.nextLine().charAt(0);
+                        if(confirm == 'y') {
+                            studentController.remove(code);
+                            System.out.println("Xóa thành công");
+                        }
+                    }
                     break;
                 case 5:
 

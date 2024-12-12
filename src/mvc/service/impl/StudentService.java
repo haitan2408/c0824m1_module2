@@ -20,7 +20,7 @@ public class StudentService implements IStudentService {
 
     @Override
     public void remove(int id) {
-
+        studentRepository.remove(id);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class StudentService implements IStudentService {
 
     @Override
     public Student findById(int id) {
-        return null;
+        return studentRepository.findById(id);
     }
 
     @Override
