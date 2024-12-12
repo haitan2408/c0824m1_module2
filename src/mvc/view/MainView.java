@@ -111,6 +111,11 @@ public class MainView {
         int code = Integer.parseInt(scanner.nextLine());
         System.out.print("Nhập tên học sinh:");
         String name = scanner.nextLine();
+        while(name.trim().isEmpty()) {
+            System.out.println("Tên không được để trống");
+            System.out.print("Nhập lại tên học sinh:");
+            name = scanner.nextLine();
+        }
         System.out.print("Nhập địa chỉ học sinh:");
         String address = scanner.nextLine();
         System.out.print("Nhập điểm học sinh:");
