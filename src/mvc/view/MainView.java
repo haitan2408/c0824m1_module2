@@ -125,8 +125,9 @@ public class MainView {
         int code = Integer.parseInt(scanner.nextLine());
         System.out.print("Nhập tên học sinh:");
         String name = scanner.nextLine();
-        while(name.trim().isEmpty()) {
-            System.out.println("Tên không được để trống");
+        String regex = "^[A-Z]{1}[a-z ]+$";
+        while(!name.trim().matches(regex)) {
+            System.out.println("Tên không đúng định dạng");
             System.out.print("Nhập lại tên học sinh:");
             name = scanner.nextLine();
         }
